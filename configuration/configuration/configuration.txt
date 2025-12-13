@@ -1,0 +1,228 @@
+// Weblog Configuration from GitHub
+
+;; About your weblog
+;; -----------------
+
+Weblog title: Fire Weblog
+Weblog title short: Fire
+Weblog description: Fire Weblog
+Author: Fire
+Canonical domain: fire.weblog.lol
+// Landing page: home
+// Landing page template: Landing Page Template
+
+
+;; General config stuff
+;; --------------------
+
+Separator:  ❯ 
+// Navigation: about, another-page, <a href="https://example.com">Example</a>, [Example](https://example.com)
+Navigation: home, [Blog](/), tags, archive, about, pages, search, [Random](/random)
+Files path: /files/
+Landing page post count: 3
+Landing page post length: 50 words
+Post template: Post Template
+Random post location: /random
+
+;; Pagination
+;; ----------
+
+Pagination path: /page/
+Previous page template: <span class="newer"><a href="$previous_page">❮ Newer</a></span>
+Next page template: <span class="older"><a href="$next_page">Older ❯</a></span>
+
+
+;; Time stuff
+;; ----------
+
+Timezone: America/Chicago
+Date format: F j, Y
+
+
+;; Feeds
+;; -----
+
+Feed post count: 25
+// Feed post appendix: <hr /><p style="text-align: center;">Published with <strong>Weblog.lol</strong></p>
+
+
+;; Posts
+;; -----
+
+Post path format: /Y/m/d/
+Default post: <<[Date: $date
+Type:
+Title: 
+Template: 
+Content-Type: 
+Summary: 
+Location: 
+Path: 
+Slug: 
+Redirect: 
+HTTP Response: 
+Tags: 
+Status: Draft
+Index: Exclude
+Mood: 
+Color: 
+
+# Title visible on web page
+
+<!-- 
+<style>
+.notice {
+  border: 1px solid var(--red-3);
+  background: var(--gray-19);
+}
+
+.notice::before {
+  color: var(--red-3);
+}
+</style> 
+
+Style - override stylesheet or add a new style for current page or post
+
+{notice:message=My notice message}
+
+Notice - generate a span with text that after: "=" 
+-->
+
+---
+
+Body text here, Markdown / HTML.
+
+<!--
+Date: Current date and time
+
+Type: Post, Page, File, Template
+
+Template: Setup only If I want to use special Template for Page or Post
+
+Content-Type: text/css, application/manifest+json, etc...
+
+Title: Meta Data title
+ 
+Summary: Meta Data summary
+
+Location: /my-location (replace everything after: https://fire.weblog.lol/location ❓) 🤷‍♂️
+
+Path: /my-path/ (for pages only ❓) 🤷‍♂️
+
+Slug: /my-slug (for posts only, replace everything after: Post path format: /Y/m/d/my-slug ❓) 🤷‍♂️
+
+Redirect: Location: /about to ➡️ /profile or to ➡️ https://fire.omg.lol
+
+HTTP Response: 404, etc... (https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) ❓🤷‍♂️
+
+Tags: #Tag1, #Tag2, #Tag3...
+
+Status: Draft, Unlisted, Web Only, Feed Only
+
+Index: Exclude
+
+Mood: Emojis and text ❓ 🤷‍♂️
+
+Color: red, orange, yellow, green, mint, teal, cyan, blue, indigo, purple, pink, brown, white, light-gray, gray, dark-gray, black
+-->]>>
+
+Titleless title length: 15 words
+// Truncation appendix:  <a href="{permalink}">Read more &#8674;</a>
+// Title format: <h2 class="page-title">$title</h2>
+
+Multiple posts count: 10
+Multiple posts format: <<[
+[post:begin]
+<article>
+<h2 class="page-title"><a href="{location}">{post-title}</a></h2>
+{titleless-body}
+<aside class="post-info">
+<i class="fa-solid fa-clock"></i> {date}
+</aside>
+<aside class="post-tags">
+{tags}
+</aside>
+</article>
+[post:end]
+]>>
+
+;; Recent posts {recent-posts}
+;; ---------------------------
+
+Recent posts count: 5
+Recent posts format: <<[<ol id="recent-posts">
+[post:begin]  <li><a href="$location">$title</a> <span class="recent-posts-relative-date"> ($relative_date)</span></li>[post:end]</ol>]>>
+
+;; Post list {post-list}
+;; ---------------------
+
+Post list format: <<[<ol reversed id="post-list">
+[post:begin]  <li><a href="$location">$title</a> <span class="post-list-date">($date)</span></li>[post:end]</ol>]>>
+
+
+;; Page list {page-list}
+;; ---------------------
+
+Page list format: <<[<ul id="page-list">
+[page:begin]  <li><a href="$location">$title</a></li>[page:end]</ul>]>>
+
+;; Search
+;; ------
+
+Search: <<[<form action="/" method="get" id="search">
+<label id="search-label">Search:</label>
+<input type="text" name="search" placeholder="Search">
+<button type="submit">Search!</button>
+</form>]>>
+Search status: enabled
+Search template: Search Page Template
+Search results success message: There [is|are] $count [result|results] for your search:
+Search results failure message: There were no results found for your search.
+Search results format: <<[<h2>Results for:<br>“<span class="search-highlight-title">$search</span>”</h2>
+<hr>
+<p>$search_results_message</p>
+<hr>
+[post:begin]<h3><a href="$location">$title</a></h3><p style="text-align: center;"><a href="$location">Permalink</a> $date</p><p>$snippet</p>
+<hr>[post:end]]>>
+
+
+;; Tags {tags}
+;; -----------
+
+Tag path: /tag/
+Tag page template: Tag Page Template
+Tags format: <<[<ul id="tags-ul">
+[tag:begin] <li><a class="tag" href="$tag_location">$tag</a></li>[tag:end]</ul>]>>
+Tag page format: <<[<h2 class="page-title">Posts tagged with:<br>“<span class="tagged-with-title">$tag</span>”</h2>
+<hr>
+<ul class="posts-tagged-with">
+[tag:begin]  <li><a href="$location">$title</a></li>[tag:end]</ul>
+<hr>]>>
+
+// Tag listing path: /tags
+Tag listing template: Tag Listing Page Template
+// Note: tag listing order can be "alphabetical", "ascending", or "descending" where alphabetical sorts by the tag name and ascending/descending sorts by the count of entries with that tag
+Tag listing order: descending
+Tag listing format: <<[<ul id="tag-listing">
+[tag:begin]  <li><a class="tag" href="$location">$tag</a><span class="post-count"> ($count)</span></li>[tag:end]</ul>]>>
+
+;; Custom
+;; ------
+
+Weblog og image: 
+
+Mail: fire@omg.lol
+
+Address: fire
+
+Profile picture: <div id="profile-picture-container"><img style="width: auto; height: 8.7em;" class="u-photo" alt="Fire Weblog Logo" id="profile-picture" src="https://profiles.cache.lol/fire/picture?v=1763673568.9181"></div>
+
+Banner: <img style="width: 100%; height: auto;" class="u-banner" alt="Fire Weblog Banner" id="weblog-banner" src="https://profiles.cache.lol/fire/picture?v=1763673568.9181">
+
+Some pics: <script src="https://some.pics/by/fire.js?count=1&alt"></script>
+
+Notice: <span class="notice">$message</span>
+
+Statuslog: <script src="https://status.lol/fire.js?time&link&fluent&pretty"></script>
+
+All statuses: <script src="https://status.lol/fire.js?time&link&fluent&pretty&since=2025-01-01T00:00"></script>
