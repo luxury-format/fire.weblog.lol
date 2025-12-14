@@ -1,2 +1,2 @@
-# ffire.weblog.lol
+# fire.weblog.lol
 fire.weblog.lol
