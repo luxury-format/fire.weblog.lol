@@ -1,228 +1,190 @@
-// Weblog Configuration from GitHub
-
-;; About your weblog
-;; -----------------
-
-Weblog title: Fire Weblog
-Weblog title short: Fire
-Weblog description: Fire Weblog
-Author: Fire
-Canonical domain: fire.weblog.lol
-// Landing page: home
-// Landing page template: Landing Page Template
-
-
-;; General config stuff
-;; --------------------
-
-Separator:  ❯ 
-// Navigation: about, another-page, <a href="https://example.com">Example</a>, [Example](https://example.com)
-Navigation: home, [Blog](/), tags, archive, about, pages, search, [Random](/random)
-Files path: /files/
-Landing page post count: 3
-Landing page post length: 50 words
-Post template: Post Template
-Random post location: /random
-
-;; Pagination
-;; ----------
-
-Pagination path: /page/
-Previous page template: <span class="newer"><a href="$previous_page">❮ Newer</a></span>
-Next page template: <span class="older"><a href="$next_page">Older ❯</a></span>
-
-
-;; Time stuff
-;; ----------
-
-Timezone: America/Chicago
-Date format: F j, Y
-
-
-;; Feeds
-;; -----
-
-Feed post count: 25
-// Feed post appendix: <hr /><p style="text-align: center;">Published with <strong>Weblog.lol</strong></p>
-
-
-;; Posts
-;; -----
-
-Post path format: /Y/m/d/
-Default post: <<[Date: $date
-Type:
-Title: 
-Template: 
-Content-Type: 
-Summary: 
-Location: 
-Path: 
-Slug: 
-Redirect: 
-HTTP Response: 
-Tags: 
-Status: Draft
-Index: Exclude
-Mood: 
-Color: 
-
-# Title visible on web page
-
-<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{weblog-title}{separator}{post-title}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{feeds}
 <style>
-.notice {
-  border: 1px solid var(--red-3);
-  background: var(--gray-19);
+@import url('https://static.omg.lol/type/font-honey.css');
+@import url('https://static.omg.lol/type/font-lato-regular.css');
+@import url('https://static.omg.lol/type/font-lato-bold.css');
+@import url('https://static.omg.lol/type/font-lato-italic.css');
+@import url('https://static.omg.lol/type/font-md-io.css');
+@import url('https://static.omg.lol/type/fontawesome-free/css/all.css');
+
+:root {
+	--foreground: #212529;
+	--background: #f8f9fa;
+	--link: #0b7285;
+	--accent: #868e96;
 }
 
-.notice::before {
-  color: var(--red-3);
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground: #eee;
+		--background: #222;
+		--link: #99e9f2;
+		--accent: #ced4da;
+	}
 }
-</style> 
 
-Style - override stylesheet or add a new style for current page or post
+* {
+	box-sizing: border-box;
+}
 
-{notice:message=My notice message}
+body {
+	font-family: 'Lato', sans-serif;
+	font-size: 120%;
+	color: var(--foreground);
+	background: var(--background);
+}
 
-Notice - generate a span with text that after: "=" 
--->
+header nav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
 
----
+header nav li {
+	display: inline-block;
+}
 
-Body text here, Markdown / HTML.
+header nav li a {
+	display: block;
+	text-decoration: none;
+	margin-right: 1em;
+}
 
-<!--
-Date: Current date and time
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'VC Honey Deck', serif;
+	margin: 1rem 0;
+}
 
-Type: Post, Page, File, Template
+p, li {
+	line-height: 160%;
+}
 
-Template: Setup only If I want to use special Template for Page or Post
+header, main, footer {
+	max-width: 60em;
+	margin: 2em auto;
+	padding: 0 1em;
+}
 
-Content-Type: text/css, application/manifest+json, etc...
+header {
+	margin-top: 4em;
+}
 
-Title: Meta Data title
- 
-Summary: Meta Data summary
+footer p {
+	margin-top: 5em;
+	font-size: 90%;
+	text-align: center;
+}
 
-Location: /my-location (replace everything after: https://fire.weblog.lol/location ❓) 🤷‍♂️
+a:link { color: var(--link); }
+a:visited { color: var(--link); }
+a:hover { color: var(--link); }
+a:active { color: var(--link); }
 
-Path: /my-path/ (for pages only ❓) 🤷‍♂️
+.post-info, .post-tags {
+	font-size: 85%;
+	color: var(--accent);
+	text-align: right;
+}
 
-Slug: /my-slug (for posts only, replace everything after: Post path format: /Y/m/d/my-slug ❓) 🤷‍♂️
+.post-info i:nth-child(2) {
+	margin-left: .75em;
+}
 
-Redirect: Location: /about to ➡️ /profile or to ➡️ https://fire.omg.lol
+.tag {
+	background: var(--accent);
+	color: var(--background) !important;
+	padding: .3em .4em;
+	margin: .8em 0 0 .4em;
+	border-radius: .5em;
+	text-decoration: none;
+	display: inline-block;
+}
 
-HTTP Response: 404, etc... (https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) ❓🤷‍♂️
+hr {
+	border: 0;
+	height: 1px;
+	background: #333;
+	margin: 2em 0;
+}
 
-Tags: #Tag1, #Tag2, #Tag3...
+code {
+	padding: .2em .3em;
+	border: 1px solid var(--accent);
+	white-space: pre-wrap;
+	word-wrap: break-word; 
+}
 
-Status: Draft, Unlisted, Web Only, Feed Only
+pre, code {
+	font-family: 'MD IO 0.4';
+	font-size: 90%;
+}
 
-Index: Exclude
+pre code {
+	background:  #000;
+	color:  #eee;
+	display: inline-block;
+	padding: 1em;
+	white-space: pre-wrap;
+	word-wrap: break-word;   
+}
 
-Mood: Emojis and text ❓ 🤷‍♂️
+img {
+	max-width: 100%;
+}
 
-Color: red, orange, yellow, green, mint, teal, cyan, blue, indigo, purple, pink, brown, white, light-gray, gray, dark-gray, black
--->]>>
+table {
+	border-collapse: collapse;
+}
 
-Titleless title length: 15 words
-// Truncation appendix:  <a href="{permalink}">Read more &#8674;</a>
-// Title format: <h2 class="page-title">$title</h2>
+td, th {
+	padding: .75em;
+	text-align: left;
+	border: 1px solid var(--accent);
+}
+	
+.weblog-title a {
+	text-decoration: none;
+	color: var(--foreground);
+}
 
-Multiple posts count: 10
-Multiple posts format: <<[
-[post:begin]
+</style>
+</head>
+<body>
+
+<header>
+	<h1 class="weblog-title"><a href="{base-path}">{weblog-title}</a></h1>
+	{navigation}
+</header>
+
+<main>
+
 <article>
-<h2 class="page-title"><a href="{location}">{post-title}</a></h2>
-{titleless-body}
-<aside class="post-info">
-<i class="fa-solid fa-clock"></i> {date}
-</aside>
-<aside class="post-tags">
-{tags}
-</aside>
+	{body}
+	<aside class="post-info">
+		<i class="fa-solid fa-clock"></i> {date}
+	</aside>
+	<aside class="post-tags">
+		{tags}
+	</aside>
 </article>
-[post:end]
-]>>
 
-;; Recent posts {recent-posts}
-;; ---------------------------
-
-Recent posts count: 5
-Recent posts format: <<[<ol id="recent-posts">
-[post:begin]  <li><a href="$location">$title</a> <span class="recent-posts-relative-date"> ($relative_date)</span></li>[post:end]</ol>]>>
-
-;; Post list {post-list}
-;; ---------------------
-
-Post list format: <<[<ol reversed id="post-list">
-[post:begin]  <li><a href="$location">$title</a> <span class="post-list-date">($date)</span></li>[post:end]</ol>]>>
-
-
-;; Page list {page-list}
-;; ---------------------
-
-Page list format: <<[<ul id="page-list">
-[page:begin]  <li><a href="$location">$title</a></li>[page:end]</ul>]>>
-
-;; Search
-;; ------
-
-Search: <<[<form action="/" method="get" id="search">
-<label id="search-label">Search:</label>
-<input type="text" name="search" placeholder="Search">
-<button type="submit">Search!</button>
-</form>]>>
-Search status: enabled
-Search template: Search Page Template
-Search results success message: There [is|are] $count [result|results] for your search:
-Search results failure message: There were no results found for your search.
-Search results format: <<[<h2>Results for:<br>“<span class="search-highlight-title">$search</span>”</h2>
 <hr>
-<p>$search_results_message</p>
-<hr>
-[post:begin]<h3><a href="$location">$title</a></h3><p style="text-align: center;"><a href="$location">Permalink</a> $date</p><p>$snippet</p>
-<hr>[post:end]]>>
 
+<h2>Recent posts</h2>
 
-;; Tags {tags}
-;; -----------
+{recent-posts}
 
-Tag path: /tag/
-Tag page template: Tag Page Template
-Tags format: <<[<ul id="tags-ul">
-[tag:begin] <li><a class="tag" href="$tag_location">$tag</a></li>[tag:end]</ul>]>>
-Tag page format: <<[<h2 class="page-title">Posts tagged with:<br>“<span class="tagged-with-title">$tag</span>”</h2>
-<hr>
-<ul class="posts-tagged-with">
-[tag:begin]  <li><a href="$location">$title</a></li>[tag:end]</ul>
-<hr>]>>
+</main>
 
-// Tag listing path: /tags
-Tag listing template: Tag Listing Page Template
-// Note: tag listing order can be "alphabetical", "ascending", or "descending" where alphabetical sorts by the tag name and ascending/descending sorts by the count of entries with that tag
-Tag listing order: descending
-Tag listing format: <<[<ul id="tag-listing">
-[tag:begin]  <li><a class="tag" href="$location">$tag</a><span class="post-count"> ($count)</span></li>[tag:end]</ul>]>>
+<footer>
+	<p>Made with <a href="https://weblog.lol">weblog.lol</a>.</p>
+</footer>
 
-;; Custom
-;; ------
-
-Weblog og image: 
-
-Mail: fire@omg.lol
-
-Address: fire
-
-Profile picture: <div id="profile-picture-container"><img style="width: auto; height: 8.7em;" class="u-photo" alt="Fire Weblog Logo" id="profile-picture" src="https://profiles.cache.lol/fire/picture?v=1763673568.9181"></div>
-
-Banner: <img style="width: 100%; height: auto;" class="u-banner" alt="Fire Weblog Banner" id="weblog-banner" src="https://profiles.cache.lol/fire/picture?v=1763673568.9181">
-
-Some pics: <script src="https://some.pics/by/fire.js?count=1&alt"></script>
-
-Notice: <span class="notice">$message</span>
-
-Statuslog: <script src="https://status.lol/fire.js?time&link&fluent&pretty"></script>
-
-All statuses: <script src="https://status.lol/fire.js?time&link&fluent&pretty&since=2025-01-01T00:00"></script>
+</body>
+</html>
